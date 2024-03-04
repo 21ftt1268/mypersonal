@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Image Gallery</title>
+</head>
+<body>
+
+<h1>Image Gallery</h1>
+
+<div class="gallery">
+    <?php
+    // Define an array of folder paths where your images are stored
+    $folders = array("folder1", "folder2", "folder3");
+
+    // Loop through each folder
+    foreach ($folders as $folder) {
+        // Open the directory
+        $directory = opendir($folder);
+
+        // Check if the directory exists
+        if ($directory) {
+            // Loop through each file in the directory
+            while (($file = readdir($directory)) !== false) {
+                // Check if the file is an image
+                if (in_array(strtolower(pathinfo($file, PATHINFO_EXTENSION)), array("jpg", "jpeg", "png", "gif"))) {
+                    // Display the image
+                    echo '<img src="' . $folder . '/' . $file . '" alt="' . $file . '">';
+                }
+            }
+            // Close the directory
+            closedir($directory);
+        }
+    }
+    ?>
+</div>
+
+</body>
+</html>

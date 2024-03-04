@@ -1,0 +1,27 @@
+<section id="main">
+    <!-- Items -->
+    <div class="items">
+        <div class="item intro span-2">
+            <h1>GALLERY</h1>
+            <p>Welcome to the gallery of our pictures and media hehe</p>
+        </div>
+
+        <?php
+        // Directory containing images
+        $imageDirectory = 'images';
+
+        // Get all files from the directory
+        $images = glob($imageDirectory . '/*.{jpg,jpeg,png,gif}', GLOB_BRACE);
+
+        // Loop through each image and generate HTML
+        foreach ($images as $image) {
+            $thumb = $image;
+            $full = str_replace('thumbs', 'fulls', $image); // Assuming you have separate folders for thumbs and fulls
+
+            echo '<article class="item thumb span-1">';
+            echo '<a href="' . $full . '" class="image"><img src="' . $thumb . '" alt=""></a>';
+            echo '</article>';
+        }
+        ?>
+    </div>
+</section>
